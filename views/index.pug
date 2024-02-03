@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    h1 crud nedb hub
+    ul
+        li 
+            p.c-name nombre 
+            p.c-age edad
+            p.c-deleted accion
+            p.c-update accion
+        each fruit in items
+            li
+                p.c-name= fruit.nombre
+                p.c-age= fruit.edad
+                button(id=`${fruit._id}`, class='c-deleted', onclick=`deleteFruit('${fruit._id}')`) borrar
+                button(id=`${fruit._id}`, class='c-update', onclick=`updateFruit('${fruit._id}')`) actualizar
+    h2 agregar
+            form(id='myForm')
+                label(for='nombre') Nombre:
+                input(type='text', id='nombre', name='nombre')
+
+                label(for='edad') Edad:
+                input(type='number', id='edad', name='edad')
+
+                button(type='button', id='enviarBtn') Enviar

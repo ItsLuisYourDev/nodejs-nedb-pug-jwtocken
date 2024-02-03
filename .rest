@@ -1,0 +1,33 @@
+GET http://localhost:3000/api/users HTTP/1.1
+
+###
+GET http://localhost:3000/api/users/V9qvLjhk8jB1kpsu HTTP/1.1
+
+###
+POST http://localhost:3000/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombre":"luis",
+    "edad": "12345"
+}
+###
+DELETE http://localhost:3000/api/users/ HTTP/1.1
+
+###
+DELETE http://localhost:3000/api/users/V9qvLjhk8jB1kpsu HTTP/1.1
+
+###
+DELETE http://localhost:3000/api/users/ HTTP/1.1
+Content-Type: application/json
+
+{
+    "ids":["z96FS1i77Tni9ruu","xRpU8IOMSt1uz4Qb","gZ3OvDk2NZCMW2Ml"]
+}
+###
+PUT http://localhost:3000/api/users/lEnUcAiMb0rw7vgr HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombre":"luiyi"
+}

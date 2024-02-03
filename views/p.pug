@@ -1,0 +1,53 @@
+extends layout
+
+block content
+  h1= title+ " add text"
+  p Welcome to #{title}
+
+  // Ejemplo de bucle for con condicional if y manipulación de variables
+  - let fruits = ['Apple', 'Banana', 'Orange'];
+  - let additionalFruit = 'Grapes';
+  
+  div 
+    p.cp este es un elemto con clase
+    p#ip="este es un elemto con clase"
+
+  ul
+    each fruit in items
+      li='este es el nombre: '+ fruit.nombre
+
+  ul
+    each fruit in fruits
+      li
+        if fruit === 'Banana'
+          p.special This is a special fruit: #{fruit}
+        else if fruit === 'Orange'
+          | This is another special fruit: #{fruit}
+        else
+          = fruit
+
+  // Ejemplo de bucle while y manipulación de listas
+  - let counter = 0;
+  ul
+    while counter < 3
+      li Item #{counter}
+      - counter++;
+
+  // Ejemplo de suma y manipulación de variables
+  - let num1 = 5;
+  - let num2 = 10;
+  - let sum = num1 + num2;
+
+  p The sum of #{num1} and #{num2} is #{sum}.
+
+  // Ejemplo de manipulación de listas
+  - let vegetables = ['Carrot', 'Broccoli', 'Spinach'];
+  - let newVegetable = 'Cucumber';
+
+  p
+    | Vegetables: #{vegetables.join(', ')}
+    br
+    | Adding a new vegetable: #{newVegetable}
+    - vegetables.push(newVegetable)
+    br
+    | Updated Vegetables: #{vegetables.join(', ')}
