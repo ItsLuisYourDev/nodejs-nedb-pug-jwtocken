@@ -1,5 +1,25 @@
 const db = require('../database/db')
+const generateToken = require('../utils/jwtUtils.js')
 const methodsDB = {}
+// Al autenticar al usuario, genera un token y envíalo al cliente
+const jwtUtils = require('../utils/jwtUtils');
+
+methodsDB.loginUser = (req, res) => {
+    console.log("token enter");
+
+    const userId = 123; // Reemplaza con el ID del usuario autenticado
+    const isAdmin = true; // Reemplaza con la lógica para determinar si el usuario tiene permisos de administrador
+
+    try {
+        const token = jwtUtils.generateToken(userId, isAdmin);
+        res.json({ success: true, token }); 
+    } catch (error) {
+        console.error("Ocurrió un error al generar el token:", error);
+        res.status(500).json({ success: false, message: 'Error al generar el token.' });
+    }
+};
+
+
 
 //127.0.0.1:3000/api/users
 methodsDB.getUsers = async (req, res) => {
