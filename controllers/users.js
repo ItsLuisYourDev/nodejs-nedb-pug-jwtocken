@@ -1,33 +1,27 @@
 const db = require('../database/db')
-const generateToken = require('../utils/jwtUtils.js')
 const methodsDB = {}
 // Al autenticar al usuario, genera un token y envíalo al cliente
 const jwtUtils = require('../utils/jwtUtils');
 
 methodsDB.loginUser = (req, res) => {
-    console.log("token enter");
-
     const userId = 123; // Reemplaza con el ID del usuario autenticado
     const isAdmin = true; // Reemplaza con la lógica para determinar si el usuario tiene permisos de administrador
-
     try {
         const token = jwtUtils.generateToken(userId, isAdmin);
-        res.json({ success: true, token }); 
+        return res.json({ success: true, token }); 
     } catch (error) {
         console.error("Ocurrió un error al generar el token:", error);
-        res.status(500).json({ success: false, message: 'Error al generar el token.' });
+        return res.status(500).json({ success: false, message: 'Error al generar el token.' });
     }
 };
-
-
 
 //127.0.0.1:3000/api/users
 methodsDB.getUsers = async (req, res) => {
     await db.find({}, (err, data) => {
         if (err) {
-            res.json({ success: false, err: err })
+            return res.json({ success: false, err: err })
         } else {
-            res.json({ success: true, data: data })
+            return res.json({ success: true, data: data })
         }
     })
 }
@@ -37,13 +31,13 @@ methodsDB.getUserId = async (req, res) => {
     const userId = req.params.id;
     await db.find({ _id: userId }, (err, user) => {
         if (err) {
-            res.json({ success: false, err: err });
+            return res.json({ success: false, err: err });
         } else {
             if (user.length === 0) {
                 // No se encontró ningún usuario con el _id proporcionado
-                res.json({ success: false, message: 'not find register' });
+                return res.json({ success: false, message: 'not find register' });
             } else {
-                res.json({ success: true, data: user });
+                return res.json({ success: true, data: user });
             }
         }
     });
@@ -58,10 +52,9 @@ methodsDB.insertUser = async (req, res) => {
     }
     await db.insert(user, (err, user) => {
         if (err) {
-            res.json({ success: true, message: "Not insert register" })
+            return res.json({ success: true, message: "Not insert register" })
         } else {
-            console.log(user)
-            res.json({ success: true, data: user })
+            return res.json({ success: true, data: user })
         }
     })
 }
@@ -72,9 +65,9 @@ methodsDB.deleteId = async (req, res) => {
     const userId = req.params.id;
     await db.remove({ _id: userId }, (err, numREmove) => {
         if (err) {
-            res.json({ success: false, message: "Not deleted register" })
+            return res.json({ success: false, message: "Not deleted register" })
         } else {
-            res.json({ success: true, message: `Deleted ${numREmove} whit id ${userId}` })
+            return res.json({ success: true, message: `Deleted ${numREmove} whit id ${userId}` })
         }
     })
 }
@@ -82,7 +75,6 @@ methodsDB.deleteId = async (req, res) => {
 //127.0.0.1:3000/api/users
 methodsDB.deleteAll = async (req, res) => {
     const ids = req.body.ids
-    console.log(req.body)
     // si no eciste una lista
     // borra todos los datos 
     if (!req.body.ids || !Array.isArray(req.body.ids)) {
@@ -108,12 +100,10 @@ methodsDB.deleteAll = async (req, res) => {
 methodsDB.updateId = async (req, res) => {
     const userId = req.params.id;
     const newData = req.body;
-
     // Utilizando la palabra clave `await` para esperar a que la operación asíncrona se complete
     await db.update({ _id: userId }, { $set: newData }, {}, (err, numUpdated) => {
         if (err) {
             // Si hay un error, imprímelo en la consola
-            console.log(err);
             return res.status(500).json({ success: false, message: 'Error al actualizar el usuario.' });
         } else {
             if (numUpdated > 0) {
@@ -126,6 +116,5 @@ methodsDB.updateId = async (req, res) => {
         }
     });
 };
-
 
 module.exports = methodsDB

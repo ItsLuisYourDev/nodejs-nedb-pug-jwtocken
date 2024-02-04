@@ -16,7 +16,7 @@ Content-Type: application/json
 ###
 POST http://localhost:3000/api/users HTTP/1.1
 Content-Type: application/json
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMywiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzA2OTgxNTkyLCJleHAiOjE3MDY5ODUxOTJ9.T7HawbBSCGFCIfFIccRBkRBZygXFctEdfv7Q9_5Dh8c
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMywiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzA3MDI5NDI1LCJleHAiOjE3MDcwMzMwMjV9.1gXaTeAEruKAVLo30v06Ey5vucBNnG81mP_K0rYZzQc
 
 {
     "nombre": "luis",
@@ -30,7 +30,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEyMywiaXNBZG1p
 
 
 ###
-DELETE http://localhost:3000/api/users/V9qvLjhk8jB1kpsu HTTP/1.1
+DELETE http://localhost:3000/api/users/ HTTP/1.1
 
 ###
 DELETE http://localhost:3000/api/users/ HTTP/1.1
