@@ -1,0 +1,15 @@
+extends ../layout
+
+block content
+    div.container-task
+        div.contenido_notas
+            div.contenido_categorias
+                div.categoria-enlases
+                    each i in data
+                        a(href='#', id=`${i._id}`).categoria= i.categoria
+                div.categoria-boton
+                    button(type='button') +
+            div.contenido_notas_lista
+                div#contenidoSecuendarioList
+                div#contenido_lista
+                div#Container_input_texto lll

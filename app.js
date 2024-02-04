@@ -13,5 +13,6 @@ app.use(express.json());
 //? add router
 app.use("/",require("./routes/index"))
 app.use("/api/users",require("./routes/users"))
+app.use("/api/chats",require("./routes/chats"))
 
 module.exports = app

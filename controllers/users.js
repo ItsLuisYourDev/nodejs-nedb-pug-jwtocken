@@ -17,7 +17,7 @@ methodsDB.loginUser = (req, res) => {
 
 //127.0.0.1:3000/api/users
 methodsDB.getUsers = async (req, res) => {
-    await db.find({}, (err, data) => {
+    await db.users.find({}, (err, data) => {
         if (err) {
             return res.json({ success: false, err: err })
         } else {
@@ -29,7 +29,7 @@ methodsDB.getUsers = async (req, res) => {
 //127.0.0.1:3000/api/users/1233435125
 methodsDB.getUserId = async (req, res) => {
     const userId = req.params.id;
-    await db.find({ _id: userId }, (err, user) => {
+    await db.users.find({ _id: userId }, (err, user) => {
         if (err) {
             return res.json({ success: false, err: err });
         } else {
@@ -50,7 +50,7 @@ methodsDB.insertUser = async (req, res) => {
         nombre: nombre,
         edad: edad
     }
-    await db.insert(user, (err, user) => {
+    await db.users.insert(user, (err, user) => {
         if (err) {
             return res.json({ success: true, message: "Not insert register" })
         } else {
@@ -63,7 +63,7 @@ methodsDB.insertUser = async (req, res) => {
 methodsDB.deleteId = async (req, res) => {
     // esto es 
     const userId = req.params.id;
-    await db.remove({ _id: userId }, (err, numREmove) => {
+    await db.users.remove({ _id: userId }, (err, numREmove) => {
         if (err) {
             return res.json({ success: false, message: "Not deleted register" })
         } else {
@@ -78,7 +78,7 @@ methodsDB.deleteAll = async (req, res) => {
     // si no eciste una lista
     // borra todos los datos 
     if (!req.body.ids || !Array.isArray(req.body.ids)) {
-        await db.remove({}, { multi: true }, (err, numRemove) => {
+        await db.users.remove({}, { multi: true }, (err, numRemove) => {
             if (err) {
                 res.json({ success: false, message: "Not deleted register" })
             } else {
@@ -88,7 +88,7 @@ methodsDB.deleteAll = async (req, res) => {
         // en caso de ir una lista
         // borra los datos en una lista 
     } else {
-        await db.remove({ _id: { $in: ids } }, { multi: true }, (err, numRemove) => {
+        await db.users.remove({ _id: { $in: ids } }, { multi: true }, (err, numRemove) => {
             if (err) {
                 res.json({ success: false, message: `Not deleted register` })
             } else {
@@ -101,7 +101,7 @@ methodsDB.updateId = async (req, res) => {
     const userId = req.params.id;
     const newData = req.body;
     // Utilizando la palabra clave `await` para esperar a que la operación asíncrona se complete
-    await db.update({ _id: userId }, { $set: newData }, {}, (err, numUpdated) => {
+    await db.users.update({ _id: userId }, { $set: newData }, {}, (err, numUpdated) => {
         if (err) {
             // Si hay un error, imprímelo en la consola
             return res.status(500).json({ success: false, message: 'Error al actualizar el usuario.' });
@@ -116,5 +116,6 @@ methodsDB.updateId = async (req, res) => {
         }
     });
 };
+
 
 module.exports = methodsDB
